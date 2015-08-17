@@ -1,0 +1,5 @@
+Chess
+Chess.exe
+*.o
+*~
+.DS_Store
