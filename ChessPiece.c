@@ -2,62 +2,59 @@
 
 char* get_piece_type(ChessPiece chessPiece) {
     switch (chessPiece.type) {
-        case KING:
-        return "KING";
-        case QUEEN:
-        return "QUEEN";
-        case ROOK:
-        return "ROOK";
-        case BISHOP:
-        return "BISHOP";
-        case KNIGHT:
-        return "KNIGHT";
-        case PAWN:
-        return "PAWN";
-        default:
+    case KING:
+        return "K";
+    case QUEEN:
+        return "Q";
+    case ROOK:
+        return "R";
+    case BISHOP:
+        return "B";
+    case KNIGHT:
+        return "N";
+    case PAWN:
+        return "P";
+    default:
         return "Not a Type";
     }
 }
 
 char* get_piece_colour(ChessPiece chessPiece) {
-    switch (chessPiece.colour) {
-        case true:
-        return "WHITE";
-        case false:
-        return "BLACK";
-        default:
+    switch (chessPiece.isWhite) {
+    case true:
+        return "W";
+    case false:
+        return "B";
+    default:
         return "Not a Colour";
     }
 }
 
 char* get_piece_status(ChessPiece chessPiece) {
-    switch (chessPiece.status) {
-        case true:
-        return "ALIVE";
-        case false:
-        return "DEAD";
-        default:
+    switch (chessPiece.isAlive) {
+    case true:
+        return "Alive";
+    case false:
+        return "Dead";
+    default:
         return "Not a Status";
     }
 }
 
-bool create_chessPieces(ChessPiece chessPieces[16], bool isWhite) {
-    int index = -1;
+void create_chessPieces(ChessPiece chessPieces[32]) {
+    int index;
     
-    ChessPiece newPiece = {
-        .id = index,
-        .type = index,
-        .colour = isWhite,
-        .status = true
+    // Set up the White pieces
+    ChessPiece whitePiece = {
+        .id = -1,
+        .type = PAWN,
+        .isWhite = true,
+        .isAlive = true
     };
     
     for (index = 0; index < 16; index++) {
-        chessPieces[index] = newPiece;
+        chessPieces[index] = whitePiece;
         chessPieces[index].id = index;
-    }
-    
-    for (index = 0; index < 8; index++) {
-        chessPieces[index].type = PAWN;
     }
     
     chessPieces[8].type = ROOK;
@@ -71,17 +68,41 @@ bool create_chessPieces(ChessPiece chessPieces[16], bool isWhite) {
     
     chessPieces[11].type = QUEEN;
     chessPieces[12].type = KING;
-
-    return true;
+    
+    // Set up the Black pieces
+    ChessPiece blackPiece = {
+        .id = -1,
+        .type = PAWN,
+        .isWhite = false,
+        .isAlive = true
+    };
+    
+    for (index = 16; index < 32; index++) {
+        chessPieces[index] = blackPiece;
+        chessPieces[index].id = index;
+    }
+    
+    chessPieces[24].type = ROOK;
+    chessPieces[31].type = ROOK;
+    
+    chessPieces[25].type = KNIGHT;
+    chessPieces[30].type = KNIGHT;
+    
+    chessPieces[26].type = BISHOP;
+    chessPieces[29].type = BISHOP;
+    
+    chessPieces[27].type = QUEEN;
+    chessPieces[28].type = KING;
 }
 
-void print_out_chessPieces(ChessPiece chessPieces[16]) {
+void print_out_chessPieces(ChessPiece chessPieces[32]) {
     int index;
     
-    for (index = 0; index < 16; index++) {
+    for (index = 0; index < 32; index++) {
         printf("%2d: ", chessPieces[index].id);
         printf("%s ", get_piece_type(chessPieces[index]));
         printf("%s ", get_piece_colour(chessPieces[index]));
-        printf("%s\n", get_piece_status(chessPieces[index]));
+        printf("%5s\n", get_piece_status(chessPieces[index]));
+        if (index == 15) puts("");
     }
 }

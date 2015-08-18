@@ -3,18 +3,14 @@
 #include "ChessBoard.h"
 
 int main(int argc, char **argv) {
-    ChessPiece whitePieces[16];
-    ChessPiece blackPieces[16];
-    ChessBoard chessBoard[8][8];
+    ChessPiece chessPieces[32];
+    int chessBoard[8][8];
     
-    create_chessPieces(whitePieces, true);
-    create_chessPieces(blackPieces, false);
+    create_chessPieces(chessPieces);
+    print_out_chessPieces(chessPieces);
     
-    //print_out_chessPieces(whitePieces);
-    //print_out_chessPieces(blackPieces);
-    
-    create_chessBoard(chessBoard, whitePieces, blackPieces);
-    print_chessBoard(chessBoard);
+    create_chessBoard(chessBoard, chessPieces);
+    print_out_chessBoard(chessBoard, chessPieces);
     
     return 0;
 }

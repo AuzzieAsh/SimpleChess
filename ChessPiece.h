@@ -8,15 +8,15 @@ typedef enum {KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN} PieceType;
 typedef struct {
     int id;
     PieceType type;
-    bool colour;
-    bool status;
+    bool isWhite;
+    bool isAlive;
 } ChessPiece;
 
 char* get_piece_type(ChessPiece chessPiece);
 char* get_piece_colour(ChessPiece chessPiece);
 char* get_piece_status(ChessPiece chessPiece);
 
-bool create_chessPieces(ChessPiece chessPieces[16], bool isWhite);
-void print_out_chessPieces(ChessPiece chessPieces[16]);
+void create_chessPieces(ChessPiece chessPieces[32]);
+void print_out_chessPieces(ChessPiece chessPieces[32]);
 
 #endif

@@ -1,73 +1,55 @@
 #include "ChessBoard.h"
 
-bool create_chessBoard(ChessBoard chessBoard[8][8], ChessPiece whitePieces[16], ChessPiece blackPieces[16]) {
+void create_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
     int row, col;
-    ChessPiece emptyPiece = {.id = -1, .type = -1, .colour = -1, .status = false};
     
     for (row = 0; row < 8; row++) {
         for (col = 0; col < 8; col++) {
             switch (row) {
-                case 0:
-                chessBoard[row][col].pieceInSlot = whitePieces[8+col];
+            case 0:
+                chessBoard[row][col] = chessPieces[8+col].id;
                 break;
-                case 1:
-                chessBoard[row][col].pieceInSlot = whitePieces[col];
+            case 1:
+                chessBoard[row][col] = chessPieces[col].id;
                 break;
-                case 6:
-                chessBoard[row][col].pieceInSlot = blackPieces[col];
+            case 6:
+                chessBoard[row][col] = chessPieces[16+col].id;
                 break;
-                case 7:
-                chessBoard[row][col].pieceInSlot = blackPieces[8+col];
+            case 7:
+                chessBoard[row][col] = chessPieces[24+col].id;
                 break;
-                default:
-                chessBoard[row][col].pieceInSlot = emptyPiece;
+            default:
+                chessBoard[row][col] = -1;
                 break;
             }
         }
     }
-    return true;
 }
 
-void print_chessBoard(ChessBoard chessBoard[8][8]) {
-    int row, col;
-    for (row = 0; row < 8; row++) {
+void print_out_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
+    int row, col, index;
+    char label;
+    
+    for (row = 7; row >= 0; row--) {
+        printf(" %d ", row + 1);
         for (col = 0; col < 8; col++) {
             printf("[");
-            if (chessBoard[row][col].pieceInSlot.status) {
-                switch (chessBoard[row][col].pieceInSlot.colour) {
-                    case true:
-                    printf("W");
-                    break;
-                    case false:
-                    printf("B");
-                    break;
-                }
-                switch (chessBoard[row][col].pieceInSlot.type) {
-                    case KING:
-                    printf("K");
-                    break;
-                    case QUEEN:
-                    printf("Q");
-                    break;
-                    case ROOK:
-                    printf("R");
-                    break;
-                    case BISHOP:
-                    printf("B");
-                    break;
-                    case KNIGHT:
-                    printf("K");
-                    break;
-                    case PAWN:
-                    printf("P");
-                    break;
-                }
-            }
-            if (chessBoard[row][col].pieceInSlot.id == -1) {
+            if (chessBoard[row][col] == -1) {
                 printf("  ");
+            }
+            else {
+                index = chessBoard[row][col];
+                printf("%s", get_piece_colour(chessPieces[index]));
+                printf("%s", get_piece_type(chessPieces[index]));
             }
             printf("]");
         }
         printf("\n");
     }
+    
+    printf("  ");
+    for (label = 'A'; label <= 'H'; label++) {
+        printf("%3c ", label);
+    }
+    printf("\n");
 }

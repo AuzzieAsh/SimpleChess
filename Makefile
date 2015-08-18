@@ -1,6 +1,7 @@
 CC = gcc
 CFLAGS = -g -Wall
 TARGET = Chess
+
 OBJ = \
 	main.o \
 	ChessPiece.o \
