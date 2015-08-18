@@ -5,7 +5,8 @@ TARGET = Chess
 OBJ = \
 	main.o \
 	ChessPiece.o \
-	ChessBoard.o
+	ChessBoard.o \
+	ChessGame.o
 
 default: $(TARGET)
 
@@ -20,6 +21,9 @@ ChessPiece.o: ChessPiece.c ChessPiece.h
 
 ChessBoard.o: ChessBoard.c ChessBoard.h ChessPiece.h
 	$(CC) $(CFLAGS) -c ChessBoard.c
+
+ChessGame.o: ChessGame.c ChessGame.h ChessPiece.h
+	$(CC) $(CFLAGS) -c ChessGame.c
 
 clean:
 	rm -f $(TARGET)
