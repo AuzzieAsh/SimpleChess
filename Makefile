@@ -10,7 +10,7 @@ OBJ = \
 
 default: $(TARGET)
 
-$(TARGET): C_defs.h $(OBJ)
+$(TARGET): my_bool.h $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
 
 main.o: main.c
@@ -27,7 +27,5 @@ ChessGame.o: ChessGame.c ChessGame.h ChessPiece.h
 
 clean:
 	rm -f $(TARGET)
-	rm -f $(TARGET).exe
 	rm -f *~
 	rm -f *.o
-	rm -f .DS_Store

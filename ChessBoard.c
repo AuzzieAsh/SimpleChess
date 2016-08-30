@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ChessBoard.h"
 
 void create_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
@@ -28,10 +29,15 @@ void create_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
 
 void print_out_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
     int row, col, index;
-    char label;
     
-    for (row = 7; row >= 0; row--) {
-        printf(" %d ", row + 1);
+    printf("  ");
+    for (col = 0; col < 8; col++) {
+        printf("%3d ", col);
+    }
+    printf("\n");
+
+    for (row = 0; row < 8; row++) {
+        printf(" %d ", row);
         for (col = 0; col < 8; col++) {
             printf("[");
             if (chessBoard[row][col] == -1) {
@@ -39,17 +45,13 @@ void print_out_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
             }
             else {
                 index = chessBoard[row][col];
-                printf("%s", get_piece_colour(chessPieces[index]));
-                printf("%s", get_piece_type(chessPieces[index]));
+                printf("%s", get_piece_colour(chessPieces[index], false));
+                printf("%s", get_piece_type(chessPieces[index], false));
             }
             printf("]");
         }
         printf("\n");
     }
     
-    printf("  ");
-    for (label = 'A'; label <= 'H'; label++) {
-        printf("%3c ", label);
-    }
-    printf("\n");
+    
 }

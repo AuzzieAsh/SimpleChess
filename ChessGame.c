@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "ChessGame.h"
 
 bool chess_game_loop(int chessBoard[8][8], ChessPiece chessPieces[32]) {
@@ -5,8 +6,6 @@ bool chess_game_loop(int chessBoard[8][8], ChessPiece chessPieces[32]) {
     bool isWhitePlayerTurn = true;
     bool success;
     char playerInput[MAX_INPUT];
-    
-    print_game_usage();
     
     for (;;) {
         printf("Player %s turn. Moves made %d\n", (isWhitePlayerTurn ? "1 (White)" : "2 (Black)"), moves);
@@ -17,24 +16,25 @@ bool chess_game_loop(int chessBoard[8][8], ChessPiece chessPieces[32]) {
             isWhitePlayerTurn = !isWhitePlayerTurn;
         }
         else
-            print_game_usage();
+            printf("Some Error !success\n");
     }
     return true;
 }
-
+/*
 bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], ChessPiece chessPieces[32]) {
-    char x1 = playerInput[0] - '0';
-    char y1 = playerInput[1];
+    int x1 = playerInput[0] - '0';
+    int y1 = playerInput[1] - '0';
     char sp = playerInput[2];
-    char x2 = playerInput[3] - '0';
-    char y2 = playerInput[4];
-    printf("%d%c%c%d%c\n", x1,y1,sp,x2,y2);
+    int x2 = playerInput[3] - '0';
+    int y2 = playerInput[4] - '0';
+    printf("handle_player_input: %d%d%c%d%d\n", x1,y1,sp,x2,y2);
+    
+    //if (x1 == 'q' || x1 == 'Q') exit(0);
     
     if (sp != ' ') return false;
-    if (x1 <= 0 || x1 > 8) return false;
+    int move_piece = chessBoard[x1][y1];
+    chessBoard[x1][y1] = -1;
+    chessBoard[x2][y2] = move_piece;
     return true;
 }
-
-void print_game_usage() {
-    printf("Usage: x1y1 x2y2\n");
-}
+*/

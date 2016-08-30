@@ -1,41 +1,42 @@
+#include <stdio.h>
 #include "ChessPiece.h"
 
-char* get_piece_type(ChessPiece chessPiece) {
+char* get_piece_type(ChessPiece chessPiece, bool verbose) {
     switch (chessPiece.type) {
     case KING:
-        return "K";
+        return (verbose ? "King" : "K");
     case QUEEN:
-        return "Q";
+        return (verbose ? "Queen" : "Q");
     case ROOK:
-        return "R";
+        return (verbose ? "Rook" : "R");
     case BISHOP:
-        return "B";
+        return (verbose ? "Bishop" : "B");
     case KNIGHT:
-        return "N";
+        return (verbose ? "Knight" : "N");
     case PAWN:
-        return "P";
+        return (verbose ? "Prawn" : "P");
     default:
         return "Not a Type";
     }
 }
 
-char* get_piece_colour(ChessPiece chessPiece) {
+char* get_piece_colour(ChessPiece chessPiece, bool verbose) {
     switch (chessPiece.isWhite) {
     case true:
-        return "W";
+        return (verbose ? "White" : "W");
     case false:
-        return "B";
+        return (verbose ? "Black" : "B");
     default:
         return "Not a Colour";
     }
 }
 
-char* get_piece_status(ChessPiece chessPiece) {
+char* get_piece_status(ChessPiece chessPiece, bool verbose) {
     switch (chessPiece.isAlive) {
     case true:
-        return "Alive";
+        return (verbose ? "Alive" : "A");
     case false:
-        return "Dead";
+        return (verbose ? "Dead" : "D");
     default:
         return "Not a Status";
     }
@@ -100,9 +101,9 @@ void print_out_chessPieces(ChessPiece chessPieces[32]) {
     
     for (index = 0; index < 32; index++) {
         printf("%2d: ", chessPieces[index].id);
-        printf("%s ", get_piece_type(chessPieces[index]));
-        printf("%s ", get_piece_colour(chessPieces[index]));
-        printf("%5s\n", get_piece_status(chessPieces[index]));
+        printf("%s ", get_piece_type(chessPieces[index], true));
+        printf("%s ", get_piece_colour(chessPieces[index], true));
+        printf("%s\n", get_piece_status(chessPieces[index], true));
         if (index == 15) puts("");
     }
 }
