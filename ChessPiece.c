@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "ChessPiece.h"
 
+/* 
+Get the piece type, either the full name or a single character it is based on.
+Given the ChessPiece type and whether true or false for verbose.
+ */
 char* get_piece_type(ChessPiece chessPiece, bool verbose) {
     switch (chessPiece.type) {
     case KING:
@@ -12,11 +16,12 @@ char* get_piece_type(ChessPiece chessPiece, bool verbose) {
     case BISHOP:
         return (verbose ? "Bishop" : "B");
     case KNIGHT:
+    // Knights single character is "N" so not to get confused with the Kings single character
         return (verbose ? "Knight" : "N");
     case PAWN:
         return (verbose ? "Prawn" : "P");
     default:
-        return "Not a Type";
+        return "Error: Not a Type";
     }
 }
 
@@ -27,7 +32,7 @@ char* get_piece_colour(ChessPiece chessPiece, bool verbose) {
     case false:
         return (verbose ? "Black" : "B");
     default:
-        return "Not a Colour";
+        return "Error: Not a Colour";
     }
 }
 
@@ -38,7 +43,7 @@ char* get_piece_status(ChessPiece chessPiece, bool verbose) {
     case false:
         return (verbose ? "Dead" : "D");
     default:
-        return "Not a Status";
+        return "Error: Not a State";
     }
 }
 
@@ -104,6 +109,6 @@ void print_out_chessPieces(ChessPiece chessPieces[32]) {
         printf("%s ", get_piece_type(chessPieces[index], true));
         printf("%s ", get_piece_colour(chessPieces[index], true));
         printf("%s\n", get_piece_status(chessPieces[index], true));
-        if (index == 15) puts("");
+        //if (index == 15) puts("");
     }
 }

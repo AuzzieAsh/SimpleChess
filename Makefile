@@ -5,10 +5,9 @@ TARGET = Chess
 OBJ = \
 	main.o \
 	ChessPiece.o \
-	ChessBoard.o \
-	ChessGame.o
+	ChessBoard.o
 
-default: $(TARGET)
+all: $(TARGET)
 
 $(TARGET): my_bool.h $(OBJ)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
@@ -21,9 +20,6 @@ ChessPiece.o: ChessPiece.c ChessPiece.h
 
 ChessBoard.o: ChessBoard.c ChessBoard.h ChessPiece.h
 	$(CC) $(CFLAGS) -c ChessBoard.c
-
-ChessGame.o: ChessGame.c ChessGame.h ChessPiece.h
-	$(CC) $(CFLAGS) -c ChessGame.c
 
 clean:
 	rm -f $(TARGET)
