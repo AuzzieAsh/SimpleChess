@@ -54,8 +54,8 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
     if (move_piece == -1) return false;
     if (place_piece != -1 && chessPieces[move_piece].isWhite == chessPieces[place_piece].isWhite) return false;
     
-    if (chessPieces[move_piece].isWhite) {
-        if (chessPieces[move_piece].type == PAWN) {
+    if (chessPieces[move_piece].type == PAWN) {
+        if (chessPieces[move_piece].isWhite) {
             if (x1 > x2) {
                 printf ("Pawn cannot move backwards\n");
                 return false;
@@ -85,9 +85,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                 chessPieces[move_piece].type = QUEEN;
             }
         }
-    }
-    else { // is Black
-        if (chessPieces[move_piece].type == PAWN) {
+        else { // is Black
             if (x2 > x1) {
                 printf("Pawn cannot move backwards\n");
                 return false;
@@ -97,7 +95,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                 printf("Pawn cannot move more than one place\n");
                 return false;
             }
-             if ((y1 != y2 && (x1 - x2) != 1) ||
+            if ((y1 != y2 && (x1 - x2) != 1) ||
                 (y1 < y2 && (y2 - y1) > 1) ||
                 (y2 < y1 && (y1 - y2) > 1)) {
                 printf("Pawn can only move one diagonaly\n");
@@ -119,9 +117,53 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
         }
     }
 
+    else if (chessPieces[move_piece].type == ROOK) {
+        if (x1 != x2 && y1 != y2) {
+            printf("Rook can only move in a straight line\n");
+            return false;
+        }
+        if (x1 != x2) {
+            if (x1 < x2) {
+                for (int i = (x1 + 1); i <= (x2 - 1); i++) {
+                    if (chessBoard[i][y1] != -1) {
+                        printf("Rook cannot overtake another piece\n");
+                        return false;
+                    }
+                }
+            }
+            else {// x2 > x1
+                for (int i = (x1 - 1); i >= (x2 + 1); i--) {
+                    if (chessBoard[i][y1] != -1) {
+                        printf("Rook cannot overtake another piece\n");
+                        return false;
+                    }
+                }
+            }
+        }
+        else { // y1 != y2
+            if (y1 < y2) {
+                for (int i = (y1 + 1); i <= (y2 - 1); i++) {
+                    if (chessBoard[x1][i] != -1) {
+                        printf("Rook cannot overtake another piece\n");
+                        return false;
+                    }
+                }
+            }
+            else { // y2 < y1
+                for (int i = (y1 - 1); i >= (y2 + 1); i--) {
+                    if (chessBoard[x1][i] != -1) {
+                        printf("Rook cannot overtake another piece\n");
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    
+
     chessBoard[x1][y1] = -1;
     chessBoard[x2][y2] = move_piece;
     if (place_piece != -1) chessPieces[place_piece].isAlive = false;
-    print_out_chessPieces(chessPieces);
+    //print_out_chessPieces(chessPieces);
     return true;
 }

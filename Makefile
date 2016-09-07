@@ -15,10 +15,10 @@ $(TARGET): my_bool.h $(OBJ)
 main.o: main.c
 	$(CC) $(CFLAGS) -c main.c
 
-ChessPiece.o: ChessPiece.c ChessPiece.h
+ChessPiece.o: ChessPiece.c
 	$(CC) $(CFLAGS) -c ChessPiece.c
 
-ChessBoard.o: ChessBoard.c ChessBoard.h ChessPiece.h
+ChessBoard.o: ChessBoard.c
 	$(CC) $(CFLAGS) -c ChessBoard.c
 
 clean:
