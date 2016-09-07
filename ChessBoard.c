@@ -52,6 +52,4 @@ void print_out_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
         }
         printf("\n");
     }
-    
-    
 }

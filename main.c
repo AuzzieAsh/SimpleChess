@@ -131,7 +131,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                     }
                 }
             }
-            else {// x2 > x1
+            else { // x2 > x1
                 for (int i = (x1 - 1); i >= (x2 + 1); i--) {
                     if (chessBoard[i][y1] != -1) {
                         printf("Rook cannot overtake another piece\n");
@@ -157,6 +157,51 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                     }
                 }
             }
+        }
+    }
+
+    else if (chessPieces[move_piece].type == KNIGHT) {
+
+    }
+
+    else if (chessPieces[move_piece].type == BISHOP) {
+        int x_diff = 0;
+        int y_diff = 0;
+        bool x_positive;
+        bool y_positive;
+
+        if (x1 < x2) {
+            x_diff = x2 - x1;
+            x_positive = true;
+        }
+        else { // x1 > x2
+            x_diff = x1 - x2;
+            x_positive = false;
+        }
+        if (y1 < y2) {
+            y_diff = y2 - y1;
+            y_positive = true;
+        }
+        else { // y1 > y2
+            y_diff = y1 - y2;
+            y_positive = false;
+        }
+ 
+        if (x_diff != y_diff) {
+            printf("Bishop can only move diagonaly\n");
+            return false;
+        }
+        if (x_positive && !y_positive) { // right up
+
+        }
+        else if (x_positive && y_positive) { // right down
+
+        }
+        else if (!x_positive && y_positive) { // left down
+
+        }
+        else { // !x_positive && !y_positive left up
+
         }
     }
     
