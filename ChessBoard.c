@@ -30,7 +30,7 @@ void create_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
 void print_out_chessBoard(int chessBoard[8][8], ChessPiece chessPieces[32]) {
     int row, col, index;
     
-    printf("  ");
+    printf("x/y");
     for (col = 0; col < 8; col++) {
         printf("%3d ", col);
     }

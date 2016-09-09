@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
         print_out_chessBoard(chessBoard, chessPieces);
         printf("Player %s turn. Moves made %d\n", (isWhitePlayerTurn ? "1 (White)" : "2 (Black)"), moves);
         printf("Your move: ");
-        gets(playerInput);
+        fgets(playerInput, sizeof(stdin), stdin);
         success = handle_player_input(playerInput, chessBoard, chessPieces);
         if (success) {
             moves++;
@@ -37,6 +37,21 @@ int main(int argc, char **argv) {
 }
 
 bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], ChessPiece chessPieces[32]) {
+    /*
+    Yeah, nah... pretty dank logic
+
+     y - - - - - - - >    
+    x  
+    | -x -y  -x +y
+    |      \ /
+    |       P
+    |      / \
+    | +x -y   +x +y
+    |
+    v
+
+    */
+
     int x1 = playerInput[0] - '0';
     int y1 = playerInput[1] - '0';
     char sp = playerInput[2];
@@ -191,16 +206,16 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
             printf("Bishop can only move diagonaly\n");
             return false;
         }
-        if (x_positive && !y_positive) { // right up
+        if (x_positive && !y_positive) {
 
         }
-        else if (x_positive && y_positive) { // right down
+        else if (x_positive && y_positive) {
 
         }
-        else if (!x_positive && y_positive) { // left down
+        else if (!x_positive && y_positive) {
 
         }
-        else { // !x_positive && !y_positive left up
+        else { // !x_positive && !y_positive
 
         }
     }
