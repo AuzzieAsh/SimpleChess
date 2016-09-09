@@ -139,7 +139,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
         }
         if (x1 != x2) {
             if (x1 < x2) {
-                for (int i = (x1 + 1); i <= (x2 - 1); i++) {
+                for (int i = (x1 + 1); i < x2; i++) {
                     if (chessBoard[i][y1] != -1) {
                         printf("Rook cannot overtake another piece\n");
                         return false;
@@ -147,7 +147,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                 }
             }
             else { // x2 > x1
-                for (int i = (x1 - 1); i >= (x2 + 1); i--) {
+                for (int i = (x1 - 1); i > x2; i--) {
                     if (chessBoard[i][y1] != -1) {
                         printf("Rook cannot overtake another piece\n");
                         return false;
@@ -157,7 +157,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
         }
         else { // y1 != y2
             if (y1 < y2) {
-                for (int i = (y1 + 1); i <= (y2 - 1); i++) {
+                for (int i = (y1 + 1); i < y2; i++) {
                     if (chessBoard[x1][i] != -1) {
                         printf("Rook cannot overtake another piece\n");
                         return false;
@@ -165,7 +165,7 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
                 }
             }
             else { // y2 < y1
-                for (int i = (y1 - 1); i >= (y2 + 1); i--) {
+                for (int i = (y1 - 1); i > y2; i--) {
                     if (chessBoard[x1][i] != -1) {
                         printf("Rook cannot overtake another piece\n");
                         return false;
@@ -176,7 +176,8 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
     }
 
     else if (chessPieces[move_piece].type == KNIGHT) {
-
+        printf("Knight is not implemented yet, will not move\n");
+        return false;
     }
 
     else if (chessPieces[move_piece].type == BISHOP) {
@@ -207,19 +208,48 @@ bool handle_player_input(char playerInput[MAX_INPUT], int chessBoard[8][8], Ches
             return false;
         }
         if (x_positive && !y_positive) {
-
+            for (int xc = (x1 + 1), yc = (y1 - 1); xc < x2; xc++, yc--) {
+                if (chessBoard[xc][yc] != -1) {
+                    printf("Bishop cannot overtake another piece\n");
+                    return false;
+                }
+            }
         }
         else if (x_positive && y_positive) {
-
+            for (int xc = (x1 + 1), yc = (y1 + 1); xc < x2; xc++, yc++) {
+                if (chessBoard[xc][yc] != -1) {
+                    printf("Bishop cannot overtake another piece\n");
+                    return false;
+                }
+            }
         }
         else if (!x_positive && y_positive) {
-
+            for (int xc = (x1 - 1), yc = (y1 + 1); xc > x2; xc--, yc++) {
+                if (chessBoard[xc][yc] != -1) {
+                    printf("Bishop cannot overtake another piece\n");
+                    return false;
+                }
+            }
         }
         else { // !x_positive && !y_positive
-
+            for (int xc = (x1 - 1), yc = (y1 - 1); xc > x2; xc--, yc--) {
+                if (chessBoard[xc][yc] != -1) {
+                    printf("Bishop cannot overtake another piece\n");
+                    return false;
+                }
+            }
         }
     }
     
+    else if (chessPieces[move_piece].type == QUEEN) {
+        printf("Queen is not implemented yet, will not move\n");
+        return false;
+    }
+
+    else { // is King
+        printf("King is not implemented yet, will not move\n");
+        return false;
+    }
 
     chessBoard[x1][y1] = -1;
     chessBoard[x2][y2] = move_piece;
